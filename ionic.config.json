@@ -1,0 +1,7 @@
+{
+  "name": "academyVoice",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
