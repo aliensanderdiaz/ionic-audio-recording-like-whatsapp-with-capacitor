@@ -1,20 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Voice Recorder
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- <ion-button (click)="startRecording()" expand="block">
+    Start
+  </ion-button>
+  <ion-button (click)="stopRecording()" expand="block" color="danger">
+    Stop
+  </ion-button> -->
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item button *ngFor="let f of storedFileNames" (click)="playFile(f.name)" detail="false">
+      {{ f.name }}
+      <ion-button slot="end" (click)="deleteRecording(f.name)" fill="clear" color="danger">
+        <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="10">
+        <span *ngIf="!recording">
+          Press and hold to record
+        </span>
+        <span *ngIf="recording">
+          {{ durationDisplay }}
+        </span>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button fill="clear" #recordbtn>
+          <ion-icon name="mic-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
